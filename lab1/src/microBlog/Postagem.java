@@ -11,17 +11,41 @@ public class Postagem {
 	private int hora;
 	private String link;
 
-	public Postagem(String link) {
+	public Postagem(String link, int mes, int ano, int dia, int minuto, int hora) {
 		this.link = link;
-		this.hora = GregorianCalendar.HOUR;
-		this.minuto = GregorianCalendar.MINUTE;
-		this.dia = GregorianCalendar.DAY_OF_MONTH;
-		this.mes = GregorianCalendar.MONTH;
-		this.ano = GregorianCalendar.YEAR;
+		this.mes = mes;
+		this.ano = ano;
+		this.dia = dia;
+		this.minuto = minuto;
+		this.hora = hora;	
 	}
 
 	public int getMes() {
 		return mes;
+	}
+
+	public void setMes(int mes) {
+		this.mes = mes;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+
+	public void setDia(int dia) {
+		this.dia = dia;
+	}
+
+	public void setMinuto(int minuto) {
+		this.minuto = minuto;
+	}
+
+	public void setHora(int hora) {
+		this.hora = hora;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public int getAno() {

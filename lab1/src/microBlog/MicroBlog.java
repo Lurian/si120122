@@ -1,5 +1,7 @@
 package microBlog;
 
+import java.util.GregorianCalendar;
+
 
 public class MicroBlog {
 
@@ -8,6 +10,7 @@ public class MicroBlog {
 	public MicroBlog() {
 		linhaDoTempo = new LinhaDoTempo();
 	}
+	
 
 	public void postaLink(String link) throws FormatodeLinkIncorretoException {
 		link = link.trim();
@@ -15,40 +18,46 @@ public class MicroBlog {
 		if((link.startsWith("http://")
 				|| link.startsWith("https://"))
 				&& !link.contains(" ")){
-			linhaDoTempo.addPostagem(link);
+			
+			int hora = GregorianCalendar.HOUR;
+			int minuto = GregorianCalendar.MINUTE;
+			int dia = GregorianCalendar.DAY_OF_MONTH;
+			int mes = GregorianCalendar.MONTH;
+			int ano = GregorianCalendar.YEAR;
+			
+			linhaDoTempo.addPostagem(link, mes, ano, dia, minuto, hora);
 		} else {
 			throw new FormatodeLinkIncorretoException("Só é aceito links no formato 'http://' ou 'https://'");
 		}
 	}
 
-	public String ultimaPostagem() {
-		return linhaDoTempo.getUltimaPostagem();
+	public String getLinkUltimaPostagem() throws NaoHouvePostagemAindaException {
+		return linhaDoTempo.getLinkUltimaPostagem();
 	}
 
-	public int getHoraUltimaPostagem() {
-		// TODO Auto-generated method stub
-		return -1;
+	public int getHoraUltimaPostagem() throws NaoHouvePostagemAindaException {
+		return linhaDoTempo.getHoraUltimaPostagem();
 	}
 	
 
-	public int getMinutoUltimaPostagem() {
-		// TODO Auto-generated method stub
-		return -1;
+	public int getMinutoUltimaPostagem() throws NaoHouvePostagemAindaException {
+		return linhaDoTempo.getMinutoUltimaPostagem();
 	}
 
-	public int getDiaUltimaPostagem() {
-		// TODO Auto-generated method stub
-		return -1;
+	public int getDiaUltimaPostagem() throws NaoHouvePostagemAindaException {
+		return linhaDoTempo.getDiaUltimaPostagem();
 	}
 
-	public int getMesUltimaPostagem() {
-		// TODO Auto-generated method stub
-		return -1;
+	public int getMesUltimaPostagem() throws NaoHouvePostagemAindaException {
+		return linhaDoTempo.getMesUltimaPostagem();
 	}
 
-	public int getAnoUltimaPostagem() {
-		// TODO Auto-generated method stub
-		return -1;
+	public int getAnoUltimaPostagem() throws NaoHouvePostagemAindaException {
+		return linhaDoTempo.getAnoUltimaPostagem();
+	}
+
+	public String getSiteMaisPostado() throws NaoHouvePostagemAindaException {
+		return linhaDoTempo.getSiteMaisPostado();
 	}
 
 }
