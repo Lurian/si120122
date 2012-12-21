@@ -67,7 +67,7 @@ public class MicroBlogTest {
 		assertEquals(ano, microBlog.getAnoUltimaPostagem());
 	}
 	@Test
-	public void siteMaisVisitadoTest() throws FormatodeLinkIncorretoException, NaoHouvePostagemAindaException{
+	public void siteMaisVisitadoeTest() throws FormatodeLinkIncorretoException, NaoHouvePostagemAindaException{
 
 		microBlog.postaLink("http://pt.wikipedia.org/wiki/Eficacia");
 		microBlog.postaLink("http://pt.wikipedia.org/wiki/BPM");
@@ -94,6 +94,27 @@ public class MicroBlogTest {
 
 		assertEquals("www.youtube.com.br", microBlog.getSiteMaisPostado());
 	}
+	
+	@Test
+	public void tempoMedioEntrePostangesTest() throws FormatodeLinkIncorretoException{
+		
+		microBlog.postaLink("http://pt.wikipedia.org/wiki/Eficacia");
+		microBlog.postaLink("http://pt.wikipedia.org/wiki/BPM");
+		microBlog.postaLink("https://www.google.com.br/#gukdle4ffsr+lasfratoriosadhrnsoRHem+tempos+de+prova.1355534169,d.eWU&fp=8fdb");		
+		microBlog.postaLink("https://www.google.com.br/#joag+apr235er+JSF43a5ijsnho+esrtjaher+dk,dgova.1355534169,d.eWU&fp=8fdb");			
+		microBlog.postaLink("https://www.google.com.br/#3oag+sab32+o+q43jg+jsg+hd+sjfposdfhaprjvaSDG555dhtsa,d.eWU&fp=8fdb");		
+		microBlog.postaLink("https://www.google.com.br/#Csjo+apro23dfar+S+n34al+em+temfjs+de+prk7a.sj55534169,d.eWUYFDRYfdb");					
+		microBlog.postaLink("https://www.google.com.br/#34yo+esc23ver+mens3gens+sublijsgjres34sdUnit.1355534169,d.eWU&fp=8fdb");		
+		microBlog.postaLink("http://www.youtube.com.br/gqagg33ga");
+		microBlog.postaLink("http://www.youtube.com.br/u89318h0f0h");
+		microBlog.postaLink("http://www.youtube.com.br/i9d3/a822");
+		microBlog.postaLink("http://www.youtube.com.br/45sg4g");
+		microBlog.postaLink("http://www.youtube.com.br/aas/18h0f0h");
+		microBlog.postaLink("http://www.youtube.com.br/4g3/a822");
+		
+		microBlog.getPostagensRecentes();
+		
+	}
 
 	@Test
 	public void tempoMedioEntrePostagensTest() throws NaoHouvePostagemAindaException{
@@ -117,6 +138,4 @@ public class MicroBlogTest {
 		
 		assertEquals(499, linhaDoTempo.getTempoMedioEntrePostagens());
 	}
-	
-
 }

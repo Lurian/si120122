@@ -1,6 +1,8 @@
 package microBlog;
 
 import java.util.GregorianCalendar;
+import java.util.List;
+
 
 
 public class MicroBlog {
@@ -58,6 +60,10 @@ public class MicroBlog {
 
 	public String getSiteMaisPostado() throws NaoHouvePostagemAindaException {
 		return linhaDoTempo.getSiteMaisPostado();
+	}
+
+	public List<Postagem> getPostagensRecentes() {
+		return linhaDoTempo.getPostagensRecentes();
 	}
 
 }

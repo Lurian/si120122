@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">Exemplo Configuração JSF</ui:insert></title>
+
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:panel id="link-post-panel" header="Poste Novo Link"
+			style="margin-bottom:10px;">
+			<h:panelGrid columns="4" cellpadding="5">
+				<h:outputLabel for="link-para-postar" value="Poste seu link:"
+					style="font-weight:bold" />
+
+				<p:inputText id="link-para-postar"
+					value="#{microBlog.linkASerPostado}" />
+
+				<p:commandButton value="Postar Link"
+					update="data-list,data-table" action="#{microBlog.postaLink}"/>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<p:panel id="recent-link-panel" header="Posts Recentes"
+			style="margin-bottom:10px;">
+			<h:panelGrid columns="1" cellpadding="10">
+				
+				<h3>Posts Recentes</h3>
+				<p:dataList id="data-list" value="#{microBlog.postagensRecentes}" var="postagem" type="ordered">  
+				Dia do fuking post ---->                 #{postagem.link}               
+				</p:dataList>
+
+				
+			</h:panelGrid>
+
+
+		</p:panel>
+
+
+		<p:panel id="recent-link-table" header="Posts Recentes"
+			style="margin-bottom:10px;">
+			
+			<h:dataTable id="data-table" value="#{ microBlog.postagensRecentes }" var="postagem">
+
+				<f:facet name="header"> Lista de cursos </f:facet >
+	
+				<h:column>
+					<f:facet name="header"> Link </f:facet >
+ 					#{ postagem . link }
+ 				</h:column >
+
+				<h:column>
+					<f:facet name=" header "> Data </f:facet >
+ 					#{ postagem . dia }/#{ postagem . mes }/#{ postagem . ano } Hora: #{ postagem . hora }:#{ postagem . minuto }
+ 				</h:column >
+
+			</h:dataTable >
+
+		</p:panel>
+	
+
+
+
+
+
+
+	</h:form>
+
+</h:body>
+</html>

@@ -1,5 +1,6 @@
 package microBlog;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -112,6 +113,18 @@ public class LinhaDoTempo {
 		} else 
 			throw new NaoHouvePostagemAindaException("Não houve postagens ainda");
 	}
+
+
+	public List<Postagem> getPostagensRecentes() {
+		List<Postagem> postagensRecentes = new ArrayList<Postagem>();
+		int contador = 1;
+		while(contador <= 10 && postagens.size() > contador){
+			postagensRecentes.add(postagens.get(postagens.size() - contador));
+			contador++;
+		}
+		return postagensRecentes;
+	}
 }
+ 
 
 
