@@ -1,47 +1,34 @@
 package microBlog;
 
-import java.util.GregorianCalendar;
+import microBlogException.FormatoDeLinkIncorretoException;
+import microBlogUtil.Tempo;
 
 public class Postagem {
+	private Tempo tempo;
 
-	private int mes;
-	private int ano;
-	private int dia;
-	private int minuto;
-	private int hora;
 	private String link;
 
-	public Postagem(String link, int mes, int ano, int dia, int minuto, int hora) {
+	public Postagem(String link, Tempo tempo) throws FormatoDeLinkIncorretoException {
+		
+		if(!(link.startsWith("http://")
+				|| link.startsWith("https://"))
+				|| link.contains(" ")){
+			throw new FormatoDeLinkIncorretoException("O link contem um formato Invalido");
+		}
 		this.link = link;
-		this.mes = mes;
-		this.ano = ano;
-		this.dia = dia;
-		this.minuto = minuto;
-		this.hora = hora;	
+		this.tempo = tempo;
+	}
+
+	public Tempo getTempo() {
+		return tempo;
+	}
+
+	public void setTempo(Tempo tempo) {
+		this.tempo = tempo;
 	}
 
 	public int getMes() {
-		return mes;
-	}
-
-	public void setMes(int mes) {
-		this.mes = mes;
-	}
-
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-
-	public void setDia(int dia) {
-		this.dia = dia;
-	}
-
-	public void setMinuto(int minuto) {
-		this.minuto = minuto;
-	}
-
-	public void setHora(int hora) {
-		this.hora = hora;
+		return tempo.getMes();
 	}
 
 	public void setLink(String link) {
@@ -49,19 +36,19 @@ public class Postagem {
 	}
 
 	public int getAno() {
-		return ano;
+		return tempo.getAno();
 	}
 
 	public int getDia() {
-		return dia;
+		return tempo.getDia();
 	}
 
 	public int getMinuto() {
-		return minuto;
+		return tempo.getMinuto();
 	}
 
 	public int getHora() {
-		return hora;
+		return tempo.getHora();
 	}
 
 	public String getLink() {

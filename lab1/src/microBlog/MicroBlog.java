@@ -3,6 +3,10 @@ package microBlog;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import microBlogException.FormatoDeLinkIncorretoException;
+import microBlogException.NaoHouvePostagemAindaException;
+import microBlogUtil.Tempo;
+
 
 
 public class MicroBlog {
@@ -13,24 +17,13 @@ public class MicroBlog {
 		linhaDoTempo = new LinhaDoTempo();
 	}
 	
+	public String getTempoMedioEntrePostagens() throws NaoHouvePostagemAindaException{
+		return linhaDoTempo.getTempoMedioEntrePostagens();
+	}
+	
 
-	public void postaLink(String link) throws FormatodeLinkIncorretoException {
-		link = link.trim();
-			
-		if((link.startsWith("http://")
-				|| link.startsWith("https://"))
-				&& !link.contains(" ")){
-			
-			int hora = GregorianCalendar.HOUR;
-			int minuto = GregorianCalendar.MINUTE;
-			int dia = GregorianCalendar.DAY_OF_MONTH;
-			int mes = GregorianCalendar.MONTH;
-			int ano = GregorianCalendar.YEAR;
-			
-			linhaDoTempo.addPostagem(link, mes, ano, dia, minuto, hora);
-		} else {
-			throw new FormatodeLinkIncorretoException("Só é aceito links no formato 'http://' ou 'https://'");
-		}
+	public void postaLink(String link) throws FormatoDeLinkIncorretoException {
+			linhaDoTempo.addPostagem(link, new Tempo(new GregorianCalendar()));
 	}
 
 	public String getLinkUltimaPostagem() throws NaoHouvePostagemAindaException {

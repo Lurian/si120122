@@ -1,8 +1,14 @@
-package microBlog;
+package microBlogTest;
 
 import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
+
+import microBlog.LinhaDoTempo;
+import microBlog.MicroBlog;
+import microBlogException.FormatoDeLinkIncorretoException;
+import microBlogException.NaoHouvePostagemAindaException;
+import microBlogUtil.Tempo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +23,7 @@ public class MicroBlogTest {
 	}
 
 	@Test
-	public void postaLinkTest() throws FormatodeLinkIncorretoException, NaoHouvePostagemAindaException {
+	public void postaLinkTest() throws FormatoDeLinkIncorretoException, NaoHouvePostagemAindaException {
 		microBlog.postaLink("http://www.youtube.com.br/meuvideo");
 		assertEquals("http://www.youtube.com.br/meuvideo", microBlog.getLinkUltimaPostagem());
 
@@ -33,32 +39,32 @@ public class MicroBlogTest {
 		try {
 			microBlog.postaLink("O link ta aki galera: https://www.youtube.com.br/meuvideo");
 			fail("An exception should have been thrown");
-		} catch (FormatodeLinkIncorretoException e){ /* An exception should be caught */ }
+		} catch (FormatoDeLinkIncorretoException e){ /* An exception should be caught */ }
 
 		try {
 			microBlog.postaLink("http://www.youtube.com.br/meuvideo se liguem no video!");
 			fail("An exception should have been thrown");
-		} catch (FormatodeLinkIncorretoException e){ /* An exception should be caught */ }
+		} catch (FormatoDeLinkIncorretoException e){ /* An exception should be caught */ }
 
 		try {
 			microBlog.postaLink("Doc: https://docs.google.com/document/d/1ag35a");
 			fail("An exception should have been thrown");
-		} catch (FormatodeLinkIncorretoException e){ /* An exception should be caught */ }
+		} catch (FormatoDeLinkIncorretoException e){ /* An exception should be caught */ }
 
 		try {
 			microBlog.postaLink("https://docs.google.com/document/d/1ag35a Muito massa xD");
 			fail("An exception should have been thrown");
-		} catch (FormatodeLinkIncorretoException e){ /* An exception should be caught */ }
+		} catch (FormatoDeLinkIncorretoException e){ /* An exception should be caught */ }
 	}
 
 	@Test
-	public void horaDaPostagemTest() throws FormatodeLinkIncorretoException, NaoHouvePostagemAindaException{
+	public void horaDaPostagemTest() throws FormatoDeLinkIncorretoException, NaoHouvePostagemAindaException{
 		microBlog.postaLink("http://www.youtube.com.br/meuvideo");
-		int hora = GregorianCalendar.HOUR;
-		int minuto = GregorianCalendar.MINUTE;
-		int dia = GregorianCalendar.DAY_OF_MONTH;
-		int mes = GregorianCalendar.MONTH;
-		int ano = GregorianCalendar.YEAR;
+		int hora = GregorianCalendar.getInstance().get(GregorianCalendar.HOUR_OF_DAY);
+		int minuto = GregorianCalendar.getInstance().get(GregorianCalendar.MINUTE);
+		int dia = GregorianCalendar.getInstance().get(GregorianCalendar.DAY_OF_MONTH);
+		int mes = GregorianCalendar.getInstance().get(GregorianCalendar.MONTH);
+		int ano = GregorianCalendar.getInstance().get(GregorianCalendar.YEAR);
 
 		assertEquals(hora, microBlog.getHoraUltimaPostagem());
 		assertEquals(minuto, microBlog.getMinutoUltimaPostagem());
@@ -67,7 +73,7 @@ public class MicroBlogTest {
 		assertEquals(ano, microBlog.getAnoUltimaPostagem());
 	}
 	@Test
-	public void siteMaisVisitadoeTest() throws FormatodeLinkIncorretoException, NaoHouvePostagemAindaException{
+	public void siteMaisVisitadoeTest() throws FormatoDeLinkIncorretoException, NaoHouvePostagemAindaException{
 
 		microBlog.postaLink("http://pt.wikipedia.org/wiki/Eficacia");
 		microBlog.postaLink("http://pt.wikipedia.org/wiki/BPM");
@@ -96,7 +102,7 @@ public class MicroBlogTest {
 	}
 	
 	@Test
-	public void tempoMedioEntrePostangesTest() throws FormatodeLinkIncorretoException{
+	public void tempoMedioEntrePostangesTest() throws FormatoDeLinkIncorretoException{
 		
 		microBlog.postaLink("http://pt.wikipedia.org/wiki/Eficacia");
 		microBlog.postaLink("http://pt.wikipedia.org/wiki/BPM");
@@ -117,25 +123,25 @@ public class MicroBlogTest {
 	}
 
 	@Test
-	public void tempoMedioEntrePostagensTest() throws NaoHouvePostagemAindaException{
+	public void tempoMedioEntrePostagensTest() throws NaoHouvePostagemAindaException, FormatoDeLinkIncorretoException{
 		LinhaDoTempo linhaDoTempo = new LinhaDoTempo();
 		
-		linhaDoTempo.addPostagem("http://www.youtube.com.br", 12, 2012, 19, 42, 14);
+		linhaDoTempo.addPostagem("http://www.youtube.com.br", new Tempo(new GregorianCalendar(2012, 12, 19, 14, 42)));
 		
-		linhaDoTempo.addPostagem("http://www.youtube.com.br", 12, 2012, 19, 59, 14);
+		linhaDoTempo.addPostagem("http://www.youtube.com.br", new Tempo(new GregorianCalendar(2012, 12, 19, 14, 59)));
 			
-		assertEquals(17, linhaDoTempo.getTempoMedioEntrePostagens());
+		assertEquals("17 Minutos", linhaDoTempo.getTempoMedioEntrePostagens());
 		
-		linhaDoTempo.addPostagem("http://www.youtube.com.br", 12, 2012, 19, 34, 17);
+		linhaDoTempo.addPostagem("http://www.youtube.com.br", new Tempo(new GregorianCalendar(2012, 12, 19, 17, 34)));
+	
+		assertEquals("1 Hora", linhaDoTempo.getTempoMedioEntrePostagens());
 		
-		assertEquals(86, linhaDoTempo.getTempoMedioEntrePostagens());
+		linhaDoTempo.addPostagem("http://www.youtube.com.br", new Tempo(new GregorianCalendar(2012, 12, 20, 12, 9)));
 		
-		linhaDoTempo.addPostagem("http://www.youtube.com.br", 12, 2012, 20, 9, 12);
-		
-		assertEquals(429, linhaDoTempo.getTempoMedioEntrePostagens());
+		assertEquals("7 Horas", linhaDoTempo.getTempoMedioEntrePostagens());
 			
-		linhaDoTempo.addPostagem("http://www.youtube.com.br", 12, 2012, 21, 0, 0);
+		linhaDoTempo.addPostagem("http://www.youtube.com.br", new Tempo(new GregorianCalendar(2012, 12, 21, 0, 0)));
 		
-		assertEquals(499, linhaDoTempo.getTempoMedioEntrePostagens());
+		assertEquals("8 Horas", linhaDoTempo.getTempoMedioEntrePostagens());
 	}
 }
