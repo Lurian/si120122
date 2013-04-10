@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">Recombinacao Textual</ui:insert></title>
+
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:panel header="Recombine seu Texto"  style="width:1500px">
+			<h:panelGrid columns="1">
+
+				<p:inputTextarea id="recText" rows="6" cols="170" />
+
+				<h:commandButton value="Adicionar Linha" update="recText" />
+
+			</h:panelGrid>
+
+			<div align="right">
+				<h:commandButton value="Cancelar" action="index.xhtml" />
+
+				<h:commandButton value="Salvar" action="index.xhtml" />
+			</div>
+
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

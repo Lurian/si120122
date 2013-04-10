@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">Recombinacao Textual</ui:insert></title>
+
+</h:head>
+
+<h:body>
+
+
+	<h:form>
+
+		<p:panel header="Recombinação Textual" style="width:1500px">
+			<h:panelGrid columns="2">
+				<p:panel header="Lista de Textos para Recombinação">
+					<h:panelGrid columns="1">
+
+						<p:selectOneListbox value="#{Recombinador.textoPreSelecionado}" id="textList"	style="width:1000px">
+							<f:selectItems value="#{Recombinador.textos}" var="texto"  itemValue="#{texto}" />  
+						</p:selectOneListbox>
+
+					</h:panelGrid>
+				</p:panel>
+				<p:panel header="Tipos de Recombinação">
+					<h:panelGrid columns="1">
+
+						<p:selectOneListbox value="#{Recombinador.recombinadorPreSelecionado}" id="recTypes" style="width:300px">
+								<f:selectItems value="#{Recombinador.recombinadores}" var="recombinador"  itemValue="#{recombinador}" />  
+						</p:selectOneListbox>
+
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>
+			<div align="right">
+				<h:commandButton value="Cancelar" action="index.xhtml" />
+
+				<h:commandButton value="Salvar" action="recombinacaoTextual.xhtml" />
+			</div>
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>
