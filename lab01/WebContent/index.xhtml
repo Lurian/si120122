@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">Micro Blog</ui:insert></title>
+
+</h:head>
+
+<h:body>
+
+
+	<h:form>
+		<p:panel id="link-post-panel" header="Poste Novo Link"
+			style="margin-bottom:10px;">
+			<h:panelGrid columns="1" cellpadding="5">
+			
+			<h:outputLabel id="formato-invalido-label" for="link-para-postar" value="Link Invalido! Use https//: ou htttp//:"
+						style="font-weight:bold" rendered="#{microBlog.formatoDeLinkInvalido}" />
+			
+				<h:panelGrid columns="3" cellpadding="5">
+					<h:outputLabel for="link-para-postar" value="Poste seu link:"
+						style="font-weight:bold" />
+
+					<p:inputText id="link-para-postar" size="100"
+						value="#{microBlog.linkASerPostado}" />
+
+					<p:commandButton value="Postar Link"
+						action="#{microBlog.postaLink}"
+						update="data-table,site-mais-postado-label,tempo-medio-label,formato-invalido-label" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+		</p:panel>
+
+	
+	
+	
+		<p:panel id="post-panel" header="Suas Postagens"
+			style="margin-bottom:10px;">
+
+			<h:panelGrid columns="1" cellpadding="5">
+
+				<p:panel id="recent-link-table" header="Posts Recentes"
+					style="margin-bottom:10px;">
+
+					<h:panelGrid columns="1" cellpadding="5">
+						<h:dataTable id="data-table"
+							value="#{ microBlog.postagensRecentes }" var="postagem"
+							cellspacing="15" border="5"  >
+
+							<f:facet name="header"> Lista dos 10 posts mais recentes </f:facet>
+
+							<h:column>
+								<f:facet name="header"> Link </f:facet>
+ 							#{ postagem . link }
+ 						</h:column>
+
+							<h:column>
+								<f:facet name="header"> Data </f:facet>
+ 								<h:outputText value="#{postagem.dia }" ><f:convertNumber minIntegerDigits="2"/>	</h:outputText>/<h:outputText value="#{ postagem . mes }" > <f:convertNumber minIntegerDigits="2"/> 	</h:outputText>/#{ postagem . ano }  Hora:
+ 								 								<h:outputText value="#{ postagem . hora }" > 	<f:convertNumber minIntegerDigits="2"/> 	</h:outputText>:<h:outputText value="#{ postagem . minuto }" > 	<f:convertNumber minIntegerDigits="2"/> 	</h:outputText>
+ 						</h:column>
+
+						</h:dataTable>
+					</h:panelGrid>
+
+				</p:panel>
+
+				<p:panel id="post-information-panel" header="Informações Gerais"
+					style="margin-bottom:10px;">
+
+					<h:panelGrid columns="1" cellpadding="30"
+						title="Informações Gerais">
+
+						<h:outputLabel
+							value="Tempo Medio entre as Postagens: #{microBlog.tempoMedioEntrePostagens}"
+							style="font-weight:bold" id="tempo-medio-label" />
+
+						<h:outputLabel
+							value="Site mais postado: #{microBlog.siteMaisPostado}"
+							style="font-weight:bold" id="site-mais-postado-label" />
+
+					</h:panelGrid>
+
+
+				</p:panel>
+
+			</h:panelGrid>
+		</p:panel>
+
+
+
+
+
+	</h:form>
+
+</h:body>
+</html>
