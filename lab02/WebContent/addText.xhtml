@@ -13,27 +13,24 @@
 </h:head>
 
 <h:body>
-
-
 	<h:form>
+		<p:panel id="addTextPanel" header="Add a new text" >
+			<div align="center" >
+			    
 
-		<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:inputTextarea for="addTextPanel" value="#{Recombinator.currentText}"  style="width:100%; max-height:500px; resize:vertical" autoResize="false" >
+				   <p:resizable for="addTextPanel" containment="true"/> 
+				</p:inputTextarea>
 
-		<p:panel header="Main Page">
-			<div align="center">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="2" >
 
-					<p:commandButton value="Text Recombinator"
-						action="#{Recombinator.checkTexts}" update="growl" ajax="false"/>
+					<p:commandButton value="Save" action="#{Recombinator.addText}" ajax="false"/>
 
-
-					<p:button value="Add Text"
-						outcome="addText.xhtml"/>
+					<p:commandButton value="Cancel" action="#{Recombinator.cancel}" ajax="false" />
 
 				</h:panelGrid>
 			</div>
 		</p:panel>
 	</h:form>
-
 </h:body>
 </html>

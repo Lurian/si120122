@@ -14,26 +14,26 @@
 
 <h:body>
 
-
 	<h:form>
-
+	
 		<p:growl id="growl" showDetail="true" sticky="true" />
+		
+		<p:panel header="Recombine your text"  style="width:1500px">
+			<h:panelGrid columns="1">
 
-		<p:panel header="Main Page">
-			<div align="center">
-				<h:panelGrid columns="2">
+				<h:outputText id="recText" value="#{Recombinator.currentText}" />
 
-					<p:commandButton value="Text Recombinator"
-						action="#{Recombinator.checkTexts}" update="growl" ajax="false"/>
+				<p:commandButton value="Add line" action="#{Recombinator.addLine}" update="recText,growl" ajax="false" />
 
+			</h:panelGrid>
 
-					<p:button value="Add Text"
-						outcome="addText.xhtml"/>
+			<div align="right">
+				<p:commandButton value="Cancel" action="#{Recombinator.cancel}" ajax="false" />
 
-				</h:panelGrid>
+				<p:commandButton value="Save" action="#{Recombinator.addText}" ajax="false" />
 			</div>
+
 		</p:panel>
 	</h:form>
-
 </h:body>
 </html>

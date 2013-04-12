@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title><ui:insert name="title">Text Recombinator</ui:insert></title>
+
+</h:head>
+
+<h:body>
+
+
+	<h:form>
+
+		<p:growl id="growl" showDetail="true" sticky="true" />
+
+		<p:panel header="Text Recombination">
+			<h:panelGrid columns="2" style="width:100%">
+				<p:panel header="Available Texts for Recombination" style="width:98%">
+					<h:panelGrid columns="1" style="width:100%">
+
+						<p:selectOneListbox value="#{Recombinator.currentText}"
+							id="textList" style="width:100%">
+							<f:selectItems value="#{Recombinator.texts}" var="texto"
+								itemValue="#{texto}" />
+						</p:selectOneListbox>
+
+					</h:panelGrid>
+				</p:panel>
+				<p:panel header="Recombination Types" style="width:98%">
+					<h:panelGrid columns="1" style="width:100%">
+
+						<p:selectOneListbox value="#{Recombinator.currentRecombinator}"	id="recTypes" style="width:100%">
+							<f:selectItems value="#{Recombinator.recombinators}"
+								var="recombinator" itemValue="#{recombinator}" />
+						</p:selectOneListbox>
+
+					</h:panelGrid>
+				</p:panel>
+			</h:panelGrid>
+			<div align="right">
+				<p:commandButton value="Cancel" action="#{Recombinator.cancel}"
+					ajax="false" />
+
+				<p:commandButton value="Recombine"
+					action="#{Recombinator.recombine}" update="growl" ajax="false" />
+			</div>
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>
